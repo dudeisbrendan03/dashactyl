@@ -262,7 +262,7 @@ module.exports.load = async function(app, db) {
 
     let newsettings = JSON.parse(fs.readFileSync("./settings.json").toString());
     if (newsettings.api.client.allow.server.delete == true) {
-      if (!req.session.pterodactyl.relationships.servers.data.filter(server => server.attributes.id == req.query.id)) return res.send("Could not find server with that ID.");
+      if (req.session.pterodactyl.relationships.servers.data.filter(server => server.attributes.id == req.query.id).length == 0) return res.send("Could not find server with that ID.");
 
       let deletionresults = await fetch(
         settings.pterodactyl.domain + "/api/application/servers/" + req.query.id,
