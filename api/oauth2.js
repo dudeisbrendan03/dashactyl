@@ -54,6 +54,7 @@ module.exports.load = async function(app, db) {
       let scopes = codeinfo.scope;
       let missingscopes = [];
       let newsettings = JSON.parse(fs.readFileSync("./settings.json"));
+
       if (scopes.replace(/identify/g, "") == scopes) missingscopes.push("identify");
       if (scopes.replace(/email/g, "") == scopes) missingscopes.push("email");
       if (newsettings.api.client.bot.joinguild.enabled == true) if (scopes.replace(/guilds.join/g, "") == scopes) missingscopes.push("guilds.join");
@@ -69,6 +70,34 @@ module.exports.load = async function(app, db) {
       );
       let userinfo = JSON.parse(await userjson.text());
       if (userinfo.verified == true) {
+        
+        let ip = (newsettings.api.client.oauth2.ip["trust x-forwarded-for"] == true ? (req.headers['x-forwarded-for'] || req.connection.remoteAddress) : req.connection.remoteAddress).replace(/::1/g, "::ffff:127.0.0.1").replace(/^.*:/, '');
+        
+        if (newsettings.api.client.oauth2.ip.block.includes(ip)) return res.send("You could not sign in, because your IP has been blocked from signing in.")
+
+        if (newsettings.api.client.oauth2.ip["duplicate check"] == true) {
+          let allips = await db.get("ips") ? await db.get("ips") : [];
+          let mainip = await db.get("ip-" + userinfo.id);
+          if (mainip) {
+            if (mainip !== ip) {
+              allips = allips.filter(ip2 => ip2 !== mainip);
+              if (allips.includes(ip)) {
+                return res.send("It has been detected that you may be using an alt account.")
+              }
+              allips.push(ip);
+              await db.set("ips", allips);
+              await db.set("ip-" + userinfo.id, ip);
+            }
+          } else {
+            if (allips.includes(ip)) {
+              return res.send("It has been detected that you may be using an alt account.")
+            }
+            allips.push(ip);
+            await db.set("ips", allips);
+            await db.set("ip-" + userinfo.id, ip);
+          }
+        }
+
         if (newsettings.api.client.bot.joinguild.enabled == true) {
           if (typeof newsettings.api.client.bot.joinguild.guildid == "string") {
             await fetch(
