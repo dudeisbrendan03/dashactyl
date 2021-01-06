@@ -24,9 +24,3 @@ You will need to edit `settings.yml` and `./themes/default/pages.json` in order 
 | Community Installation Scripts |
 | ------------------------------ |
 | https://github.com/J0shh/dashactyl-installer |
-# Copyright
-You may not claim this work as your own unless given explicit permission from the staff team.  
-You may not resell this product in any way shape or form unless you are selling the products made using this product.  
-All code in this repository is copyrighted therefore you may not sell this code or change any portions of it without leaving it open-sourced.  
-# Staff Request
-If any staff member(s) request for you to not use the panel you are required to agree and take down the panel.  
