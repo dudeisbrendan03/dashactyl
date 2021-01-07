@@ -4,10 +4,14 @@
 
 Dashactyl is a professional panel for allowing users to split resources for servers on the Pterodactyl Panel.  
 
-Dashactyl is owned by Sirv Development. You can check out their Discord: [https://discord.gg/YZNrJ649fJ](https://discord.gg/YZNrJ649fJ).
+Dashactyl is developed by Sirv Development. You can check out their Discord: [https://discord.gg/YZNrJ649fJ](https://discord.gg/YZNrJ649fJ).
 
 # Wiki
 
 Need to install Dashactyl?
 
 Check out the wiki! https://github.com/real2two/dashactyl/wiki
+
+# Disclaimer
+
+You are responsible for any damages caused by Dashactyl, therefore any contributors do not take responsibility on any damages.
