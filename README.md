@@ -14,4 +14,4 @@ Check out the wiki! https://github.com/real2two/dashactyl/wiki
 
 # Disclaimer
 
-You are responsible for any damages caused by Dashactyl, therefore any contributors do not take responsibility on any damages.
+We are not responsible for any damages.
