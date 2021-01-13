@@ -1,17 +1,10 @@
 "use strict";
 
 const settings = require("../settings.json");
-if (settings.api) {
-  if (settings.api.client) {
-    if (settings.api.client.oauth2) 
-      if (settings.api.client.oauth2.link)
-        if (settings.api.client.oauth2.link.slice(-1) == "/")
-          settings.api.client.oauth2.link = settings.api.client.oauth2.link.slice(0, -1);
-      if (settings.api.client.oauth2.callbackpath) 
-        if (settings.api.client.oauth2.callbackpath.slice(0, 1) !== "/")
-          settings.api.client.oauth2.callbackpath = "/" + settings.api.client.oauth2.callbackpath;
-  };
-};
+if (settings.api.client.oauth2.link.slice(-1) == "/")
+  settings.api.client.oauth2.link = settings.api.client.oauth2.link.slice(0, -1);
+if (settings.api.client.oauth2.callbackpath.slice(0, 1) !== "/"h) 
+  settings.api.client.oauth2.callbackpath = "/" + settings.api.client.oauth2.callbackpath;
 
 if (settings.pterodactyl) if (settings.pterodactyl.domain) {
   if (settings.pterodactyl.domain.slice(-1) == "/") settings.pterodactyl.domain = settings.pterodactyl.domain.slice(0, -1);
